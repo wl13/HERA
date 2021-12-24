@@ -9,7 +9,7 @@ The modified version has not been extensively tested so use it with cautious.
 
 # Installation
 
-All same as before expect download and use HERA-nonhpc instead of the original scripts
+All same as original post expect download and use HERA-nonhpc instead of original scripts
 
 The running of HERA requires a few other software programs. 
 1. Downloading and installing bwa-0.7.10
@@ -27,13 +27,13 @@ The running of HERA requires a few other software programs.
  
  Assume the working directory is "~/"
  
- 1. Download and unzip HERA, and then generate a folder named "HERAv1.0-master". 
+ 1. Download and unzip HERA, and then generate a folder named "HERA-nonhpc-master". 
     
     unzip HERA-nonhpc-master.zip
     
  2. Set scripts to executable.
     
-    cd HERAv1.0-master/ && chmod 750 *
+    cd HERA-nonhpc-master/ && chmod 750 *
     
  3. Generate the folder name "Test" and files for testing.
  
@@ -41,7 +41,7 @@ The running of HERA requires a few other software programs.
     
     cd Test/ && cp ../HERAv1.0-master/pipeline.sh ./
     
-    mv ../HERAv1.0-master/*.fasta ./
+    mv ../HERA-nonhpc-master/*.fasta ./
     
  4. Modify the configuration part in pipeline.sh.
 
@@ -49,7 +49,7 @@ The running of HERA requires a few other software programs.
     
     set Corrected_Pacbio=~/Test/Test_CorrectedPacbio.fasta
     
-    set Working_Script=~/HERAv1.0-master/
+    set Working_Script=~/HERA-nonhpc-master/
     
     set DAZZ_DB=~/DAZZ_DB-master/
     
@@ -58,14 +58,11 @@ The running of HERA requires a few other software programs.
     set MinPathNum=3
     
       
- 5. Run the pipeline.sh, assuming that the job scheduling system of the cluster has been configured well in the scripts of "04-Qsub-Mapping2Ctg.pl", "08-qsub_job_index.pl", "09-Qsub-Pair_Alignment.pl" and "21-Daligner_New.pl". 
+ 5. Run the pipeline-nonhpc.sh
  
-    sh pipeline.sh
+    sh pipeline-nonhpc.sh
     
- 6. Results
- 
-    ./06-Daligner/SuperContig.fasta
-    
+
 
    
 # Changes
