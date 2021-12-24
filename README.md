@@ -39,7 +39,7 @@ The running of HERA requires a few other software programs.
  
     cd ../ && mkdir Test
     
-    cd Test/ && cp ../HERAv1.0-master/pipeline.sh ./
+    cd Test/ && cp ../HERA-nonhpc-master/pipeline.sh ./
     
     mv ../HERA-nonhpc-master/*.fasta ./
     
