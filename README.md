@@ -1,4 +1,4 @@
-# HERA-nonhpc (Highly Efficient Repeat Assembly)
+# HERA-nonhpc
 # Introduction
 This is a modified version of HERA pipeline in order to run locally instead of a job scheduling system. 
 
