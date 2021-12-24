@@ -20,7 +20,7 @@ Corrected_Pacbio=~/Data/biosoft/HERA-master/Test_CorrectedPacbio.fasta
 Enzyme=GCTCTTC
 
 #the software with absolute path
-Working_Script=~/Data/biosoft/HERA-master/
+Working_Script=~/Data/biosoft/HERA-nonhpc-master/
 
 
 #the queue used to bsub jobs
@@ -104,14 +104,14 @@ mkdir 09-ReAssembly
 $Working_Script/Check.pl
 
 #convert the fasta to lines
-$Working_Script/readstoline $genome_seq $genome_name-Genome.fasta C
+$Working_Script/readstoline.pl $genome_seq $genome_name-Genome.fasta C
 
 
 #split the sequences into two files with large contigs and small contigs
-$Working_Script/01-Filter_Raw_Contig_By_Length $genome_name-Genome.fasta Large_Contig.fasta Small_Contig.fasta 50000 15000
+$Working_Script/01-Filter_Raw_Contig_By_Length.pl $genome_name-Genome.fasta Large_Contig.fasta Small_Contig.fasta 50000 15000
 
 #covert the fasta formate to lines
-$Working_Script/readstoline $Corrected_Pacbio $genome_name-CorrectedPacbio.fasta P
+$Working_Script/readstoline.pl $Corrected_Pacbio $genome_name-CorrectedPacbio.fasta P
 
 
 Corrected_Pacbio=$genome_name-CorrectedPacbio.fasta
