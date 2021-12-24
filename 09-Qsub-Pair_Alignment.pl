@@ -51,7 +51,7 @@ rm -f ./03-Pacbio-SelfAlignment/Part_SelfAlignment_$i-$j.sam
 ";
 	}
         close(OUT);
-        system("bsub < $count.pbs");
+        #system("bsub < $count.pbs");
         $count++;
     }
 }

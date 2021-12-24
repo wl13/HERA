@@ -103,22 +103,25 @@ perl $script/Daligner_Reformate.pl $Gap_Info-Final.txt $Gap_Info-Final_Reformate
 		open OUT,">$Gap_Info-pipeline.sh" or die $!;
 		print OUT "#$Gap_Info
 cd $Gap_Info
-perl $script/SplitRef.pl $Gap_Info.fasta $Gap_Info-formated.fasta
-/public/share/bma/DALIGNER1/DAZZ_DB-master/bin/fasta2DAM $Gap_Info $Gap_Info-formated.fasta
-/public/share/bma/DALIGNER1/DAZZ_DB-master/bin/DBdust $Gap_Info.dam
-/public/share/bma/DALIGNER1/DAZZ_DB-master/bin/DBsplit -x1000 -s50 $Gap_Info.dam
-/public/share/bma/DALIGNER1/DALIGNER-master/bin/HPCdaligner $Gap_Info.dam > $Gap_Info.sh
-time sh $Gap_Info.sh
+perl $script/lines_to_split.pl $Gap_Info.fasta $Gap_Info-formated.fasta
+#perl $script/SplitRef.pl $Gap_Info.fasta $Gap_Info-formated.fasta
+$DAZZ_DB/fasta2DAM $Gap_Info $Gap_Info-formated.fasta
+$DAZZ_DB/DBdust $Gap_Info.dam
+$DAZZ_DB/DBsplit -x1000 -s50 $Gap_Info.dam
+$DALIGNER/daligner $Gap_Info $Gap_Info && mv $Gap_Info.$Gap_Info.las $Gap_Info.las
+$DALIGNER/LAcheck -vS $Gap_Info $Gap_Info
+
 
 rm -f $Gap_Info.*.$Gap_Info.*.?*.las
-/public/share/bma/DALIGNER1/DAZZ_DB-master/bin/DBdump -rh $Gap_Info.dam | perl $script/ParseDAZZDB.pl > ParseDAZZDB.txt
-/public/share/bma/DALIGNER1/DALIGNER-master/bin/LAdump -cd $Gap_Info.dam $Gap_Info.las | perl $script/ParseLA.pl > $Gap_Info-Final.txt
+$DAZZ_DB/DBdump -rh $Gap_Info.dam | perl $script/ParseDAZZDB.pl > ParseDAZZDB.txt
+$DALIGNER/LAdump -cd $Gap_Info.dam $Gap_Info.las | perl $script/ParseLA.pl > $Gap_Info-Final.txt
 perl $script/Daligner_Reformate.pl $Gap_Info-Final.txt $Gap_Info-Final_Reformated.txt
+cd -
 ";
 		close(OUT);
 	}
 }
-#if($workspace eq "shell"){
-#	system("cat Super-Scaffold*-pipeline.sh >Whole-Pipeline.sh");
-#}
+if($workspace eq "shell"){
+	system("cat Super-Scaffold*-pipeline.sh >Whole-Pipeline.sh");
+}
 close(IN1);
